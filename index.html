@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Security Personnel Data</title>
+
+</head>
+<body>
+   <div>
+   	<h1>Send JSON to Node</h1>
+        <button onClick="sendJSON()">Add Data</button>
+        <p id ="result">
+        </p>
+   </div>
+<script>
+ var myData = [
+	{
+	    "sec_name": "Bill",
+	    "sec_salary": 200000
+	},
+	{
+	    "sec_name": "Lisa",
+	    "sec_salary": 40000
+	},
+	{
+	    "sec_name": "Ant",
+	    "sec_salary": 80000
+	}
+    ]
+
+function sendJSON(){
+
+var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
+xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+       document.getElementById("result").innerHTML =
+       this.responseText;
+    }
+ };
+xmlhttp.open("POST", "http://localhost:3000");
+xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+xmlhttp.send(JSON.stringify(myData));
+
+}
+
+</script>
+</body>
+</html>
